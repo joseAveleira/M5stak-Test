@@ -3,9 +3,11 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 
-const char* ssid = "your_ssid";
-const char* password = "your_password";
-const char* mqtt_server = "Broker_IP"; //192.168.0.178 0 192.168.1.229;
+const char* ssid = "***";
+const char* password = "***";
+const char* mqtt_server = "joseaveleira.es"; //192.168.0.178 0 192.168.1.229;
+const char* mqtt_user = "alumnoIoT";
+const char* mqtt_password = "cursoIoT_24";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -101,7 +103,7 @@ void reConnect() {
         String clientId = "M5Stack-";
         clientId += String(random(0xffff), HEX);
         // Attempt to connect.  尝试重新连接
-        if (client.connect(clientId.c_str())) {
+        if (client.connect("NodeMCU_Client", mqtt_user, mqtt_password)) {
             M5.Lcd.printf("\nSuccess\n");
             client.subscribe("response");
         } else {
